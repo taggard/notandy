@@ -1,7 +1,7 @@
 require 'logger'
-require 'events'
-require 'core'
-require 'config'
+require 'bot/lib/events'
+require 'bot/lib/config'
+require 'bot/core'
 
 @config = Config::new('conf/bot.yaml')
 
@@ -11,3 +11,5 @@ require 'config'
 @log.level = Logger::WARN
 
 @core = Bot::Core::new(@config, @log, @events)
+
+sleep 10000
