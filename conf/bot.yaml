@@ -1,6 +1,12 @@
-server:
-  addr: irc.notandy.com
-  port: 6667
-
-log:
+--- 
+log: 
   location: log/bot.log
+server: 
+  port: 6667
+  addr: irc.notandy.com
+bot:
+  nick: AndyBot
+  ident: bot
+  gecos: AndyBot
+channels:
+  - "#geekcouch"
