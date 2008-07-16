@@ -19,19 +19,7 @@ class Core
 		@events::subscribe(self, 'sock::reconnected', :on_sock_conn)
 
 		# Socket
-		IRC::Socket::new(@config['server']['addr'], @config['server']['port'], @events)
-	end
-
-	def parser_loop
-		while @connected
-			line = @sock.gets
-			@log.debug "<<< #{text}"
-			if line =~ /PING/
-				send("PONG irc.notandy.com")
-			elsif line =~ /andybot/
-				send("PRIVMSG \#geekcouch :Hey!")
-			end
-		end
+		@sock = IRC::Socket::new(@config['server']['addr'], @config['server']['port'], @events)
 	end
 
 	def on_sock_disconn

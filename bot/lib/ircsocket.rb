@@ -2,10 +2,10 @@
 require 'socket'
 
 module IRC
-class Socket
+class Socket < TCPSocket
 	def initialize(server, port, events)
 		@server, @port, @events = server, port, events
-		@sock = TCPSocket.new(server, port)
+		@sock = super(server, port)
 		@events.send('sock::connected', self)
 	end
 
@@ -25,7 +25,9 @@ class Socket
 	end
 
 	def gets
+		puts "hi"
 		a = @sock.gets.chomp
+		puts "< #{a}"
 		if a == nil
 			@events.send('sock::disconnected')
 			return false
@@ -34,5 +36,3 @@ class Socket
 	end
 end
 end
-
-	
