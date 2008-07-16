@@ -1,4 +1,4 @@
-require 'lib/ircsocket'
+require 'bot/lib/ircsocket'
 
 module Bot
 class Core
