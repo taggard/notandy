@@ -1,3 +1,3 @@
 sock::reconnected => socket has been closed and reopened.
 sock::connected => sent when a socket is first connected
-sock::disconnected(exception) => sent when the socket can't send
+sock::disconnected => sent when the socket gets disconnected

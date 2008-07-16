@@ -8,7 +8,7 @@ require 'bot/core'
 @events = Events::new
 
 @log = Logger::new(@config['log']['location'])
-@log.level = Logger::WARN
+@log.level = Logger::DEBUG
 
 @core = Bot::Core::new(@config, @log, @events)
 
