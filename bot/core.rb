@@ -11,6 +11,7 @@ class Core
 		@log = log
 		@events = events
 		@config = config
+		@connected = false
 
 		# Events
 		@events::subscribe(self, 'sock::disconnected', :on_sock_disconn)
