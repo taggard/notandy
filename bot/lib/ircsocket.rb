@@ -6,7 +6,7 @@ class Socket
 	def initialize(server, port, events)
 		@server, @port, @events = server, port, events
 		@sock = TCPSocket.new(server, port)
-		@events.send('sock::connected')
+		@events.send('sock::connected', self)
 	end
 
 	def reconnect(server = @server, port = @port)
