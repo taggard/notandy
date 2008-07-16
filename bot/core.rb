@@ -32,17 +32,31 @@ class Core
 
 	def on_sock_disconn
 		@connected = false
+		@events::send('bot::cant_send')
 	end
 
 	def on_sock_conn
 		@connected = true
+		irc_init
 		Thread.new { parser_loop }
 	end
 
 	private
 
 	def send(text)
-		@sock.puts text
+		@sock.puts text if @connected
+	end
+
+	def irc_init
+		id = @config['bot']['ident']
+		send("USER #{id} #{id} #{id} :#{@config['bot']['gecos']}")
+		send("NICK #{@config['bot']['nick']}")
+		sleep 3 # Register
+		@config['channels'].each do
+			|chan|
+			send("JOIN #{chan}")
+		end
+		@events::send('bot::can_send')
 	end
 end
 end
