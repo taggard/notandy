@@ -1,0 +1,6 @@
+server:
+  addr: irc.notandy.com
+  port: 6667
+
+log:
+  location: log/bot.log
