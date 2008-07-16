@@ -24,9 +24,11 @@ class Events
 	def send(name, *params)
 		@subscribed.each do
 			|event, object, method|
+#			puts "Event got: #{name}"
 			if event.downcase == name.downcase
 				if object.respond_to?(method)
 					object.method(method).call(*params)
+#					puts "Event sent to #{object.class.to_s}: #{name}"
 				end
 			end
 		end
@@ -34,5 +36,6 @@ class Events
 
 	def subscribe(object, event, method)
 		@subscribed << [event, object, method]
+#		puts "#{object.class.to_s} subscribed to #{event}."
 	end
 end

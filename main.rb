@@ -10,6 +10,6 @@ require 'bot/core'
 @log = Logger::new(@config['log']['location'])
 @log.level = Logger::DEBUG
 
-@core = Bot::Core::new(@config, @log, @events)
+@core = NotAndy::Core::new(@config, @events, @log)
 
 sleep 10000

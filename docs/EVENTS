@@ -1,3 +1,4 @@
 sock::reconnected => socket has been closed and reopened.
 sock::connected => sent when a socket is first connected
 sock::disconnected => sent when the socket gets disconnected
+sock::newline(line) => sent when the socket gets a line of input from the ircd

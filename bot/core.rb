@@ -1,21 +1,25 @@
-require 'bot/lib/esocket'
+require 'bot/esocket'
 
 module NotAndy
 class Core
 	def initialize(config, events, log)
 		@config = config
 		@events = events
-		@log = log
-		@socket = NotAndy::Socket::new(@config['server']['addr'], @config['server']['port'], @events)
+		@log = log	
 
 		## Events
 
 		@events.subscribe(self, 'sock::connected', :on_sock_conn)
 		@events.subscribe(self, 'sock::reconnected', :on_sock_conn)
 		@events.subscribe(self, 'sock::disconnected', :on_sock_disconn)
+
+		## Socket
+		
+		@socket = NotAndy::Socket::new(@config['server']['addr'], @config['server']['port'], @events)
 	end
 
-	def on_sock_conn
+	def on_sock_conn(socket = @socket)
+		@socket = socket
 		temp_irc_init
 	end
 
@@ -24,15 +28,10 @@ class Core
 	end
 
 	def temp_irc_init
-		@sock.puts "USER test test test :test"
-		@sock.puts "NICK NotAndy"
+		@socket.puts "USER test test test :test"
+		@socket.puts "NICK NotAndy"
 		sleep 3
-		@sock.puts "JOIN #geekcouch"
+		@socket.puts "JOIN #geekcouch"
 	end
 end
 end
-
-
-
-
-
