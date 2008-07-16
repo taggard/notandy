@@ -27,7 +27,7 @@ class Config
 	end
 
 	def save(file = @file)
-		File.new('file', 'w') do |out|
+		File::open('file', 'w') do |out|
 			YAML::dump(@config, out)
 		end
 	end
